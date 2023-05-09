@@ -14,7 +14,7 @@ class PokemonController
         $response->getBody()->write(
             json_encode(
                 [
-                    ['name' => 'hi', 'pokemon_number' => 4],
+                    ['name' => 'pikachu', 'pokemon_number' => 4],
                 ]
             )
         );
