@@ -10,7 +10,6 @@ use PhpPact\Consumer\Matcher\Matcher;
 use PhpPact\Consumer\Model\ConsumerRequest;
 use PhpPact\Consumer\Model\ProviderResponse;
 use PhpPact\Standalone\MockService\MockServer;
-use PhpPact\Standalone\MockService\MockServerConfig;
 use PhpPact\Standalone\MockService\MockServerEnvConfig;
 use PHPUnit\Framework\TestCase;
 
@@ -20,15 +19,15 @@ class GetAllTest extends TestCase
 
     public function setUp(): void
     {
-        $config = new MockServerConfig();
-        $config->setHost('localhost');
-        $config->setPort(7200);
-        $config->setConsumer('someConsumer');
-        $config->setProvider('someProvider');
-        $config->setCors(true);
-        $config->setPactSpecificationVersion('2.0.0');
-        $config->setHealthCheckTimeout(10);
-        $config->setHealthCheckRetrySec(1);
+        $config = new MockServerEnvConfig();
+        // $config->setHost('localhost');
+        // $config->setPort(7200);
+        // $config->setConsumer('someConsumer');
+        // $config->setProvider('someProvider');
+        // $config->setCors(true);
+        // $config->setPactSpecificationVersion('2.0.0');
+        // $config->setHealthCheckTimeout(10);
+        // $config->setHealthCheckRetrySec(1);
 
         $server = new MockServer($config);
 
@@ -74,7 +73,7 @@ class GetAllTest extends TestCase
         $service = new PokemonClient($config->getBaseUri()); // Pass in the URL to the Mock Server.
         $result  = $service->getAll(); // Make the real API request against the Mock Server.
 
-        $builder->verify(); // This will verify that the interactions took place.
+        $this->assertTrue($builder->verify());  // This will verify that the interactions took place.
 
         $this->assertCount(1, $result);
     }
