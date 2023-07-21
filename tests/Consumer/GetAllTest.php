@@ -26,6 +26,7 @@ class GetAllTest extends TestCase
         $config->setConsumer('someConsumer');
         $config->setProvider('someProvider');
         $config->setCors(true);
+        $config->setPactSpecificationVersion('2.0.0');
         $config->setHealthCheckTimeout(10);
         $config->setHealthCheckRetrySec(1);
 
